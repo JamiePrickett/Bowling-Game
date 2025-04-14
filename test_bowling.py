@@ -78,11 +78,32 @@ class TestBowlingGame(unittest.TestCase):
 
     def test_random_game(self):
         """Test a random game."""
-        rolls = [random.randint(0, 10) for _ in range(20)] # generate random rolls
-        for pins in rolls:
-            self.game.roll(pins) # roll each random number of pins
-        # Expected score: sum of all rolls
-        expected_score = sum(rolls)
+        rolls = [
+            10, # frame 1: strike
+            2, 3, # frame 2: normal rolls
+            5, 5, # frame 3: spare
+            4, 3, # frame 4: normal rolls
+            0, 0, # frame 5: gutter
+            1, 1, # frame 6: ones
+            4, 5, # frame 6: normal rolls
+            3, 4, # frame 7: normal rolls
+            8, 2, # frame 8: spare
+            6, 0, # frame 9: normal rolls
+            10, # frame 10: strike
+            2, 3 # bonus rolls
+        ]
+        expected_score = (
+            (10) + (2 + 3) + # frame 1: strike + (2b + 3b) = 15
+            (2 + 3) # frame 2: 5
+            (5 + 5) + (4) + # frame 3: spare + (4b) = 14
+            (4 + 3) + # frame 4: 7
+            (0 + 0) + # frame 5: 0
+            (1 + 1) + # frame 6: 1 + 1 = 2
+            (4 + 5) + # frame 7: 4 + 5 = 9
+            (3 + 4) + # frame 8: 3 + 4 = 7
+            (8 + 2) + (6) + # frame 9: spare + (6b) = 16
+            (10) + (2, 3) # frame 10: strike + (2b + 3b) = 15
+        )
         self.assertEqual(expected_score, self.game.score())
 
 
