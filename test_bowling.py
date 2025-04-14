@@ -92,10 +92,12 @@ class TestBowlingGame(unittest.TestCase):
             10, # frame 10: strike
             2, 3 # bonus rolls
         ]
+        for roll in rolls:
+            self.game.roll(roll)
         expected_score = (
             (10) + (2 + 3) + # frame 1: strike + (2b + 3b) = 15
             (2 + 3) + # frame 2: 5
-            (5 + 5) + (4) + # frame 3: spare + (4b) = 14 +
+            (5 + 5) + (4) + # frame 3: spare + (4b) = 14
             (4 + 3) + # frame 4: 7
             (0 + 0) + # frame 5: 0
             (1 + 1) + # frame 6: 1 + 1 = 2
@@ -103,7 +105,7 @@ class TestBowlingGame(unittest.TestCase):
             (3 + 4) + # frame 8: 3 + 4 = 7
             (8 + 2) + (6) + # frame 9: spare + (6b) = 16
             (10) + (2 + 3) # frame 10: strike + (2b + 3b) = 15
-        )
+        ) # total = 90
         self.assertEqual(expected_score, self.game.score())
 
 
