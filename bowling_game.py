@@ -9,7 +9,7 @@ class BowlingGame:
         # Initialize a new game with 10 frames
         # Each frame has up to 2 rolls (except the 10th frame which can have 3)
         self.rolls = []
-        self.current_roll = 0
+        # self.current_roll = 0 # unused variable, can be removed
 
     def roll(self, pins):
         """
@@ -19,10 +19,14 @@ class BowlingGame:
             pins: Number of pins knocked down in this roll
         """
         self.rolls.append(pins)
-        self.current_roll += 1
+        # self.current_roll += 1 # unused variable, can be removed
 
     def score(self):
-        """Calculate the score for the current game."""
+        """Calculate the score for the current game.
+        
+        Returns:
+            The total score of the game
+        """
         score = 0
         frame_index = 0
 
