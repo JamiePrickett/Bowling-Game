@@ -9,7 +9,6 @@ class BowlingGame:
         # Initialize a new game with 10 frames
         # Each frame has up to 2 rolls (except the 10th frame which can have 3)
         self.rolls = []
-        # self.current_roll = 0 # unused variable, can be removed
 
     def roll(self, pins):
         """
@@ -19,7 +18,6 @@ class BowlingGame:
             pins: Number of pins knocked down in this roll
         """
         self.rolls.append(pins)
-        # self.current_roll += 1 # unused variable, can be removed
 
     def score(self):
         """Calculate the score for the current game.
@@ -80,7 +78,9 @@ class BowlingGame:
         Returns:
             The value of the next two rolls after the strike
         """
-        return self.rolls[frame_index + 1] + self.rolls[frame_index + 2]
+        if frame_index + 2 < len(self.rolls):
+            return self.rolls[frame_index + 1] + self.rolls[frame_index + 2]
+        return 0
 
     def _spare_bonus(self, frame_index):
         """
@@ -92,4 +92,6 @@ class BowlingGame:
         Returns:
             The value of the roll after the spare
         """
-        return self.rolls[frame_index + 2]
+        if frame_index + 2 < len(self.rolls):
+            return self.rolls[frame_index + 2]
+        return 0
